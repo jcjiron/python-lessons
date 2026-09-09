@@ -5,8 +5,10 @@ from product import Product
 
 class TestProduct(unittest.TestCase):
     def test_stores_name_and_price(self):
+        # Act
         product = Product("t_shirt", price=250)
 
+        # Assert
         self.assertEqual(product.name, "t_shirt")
         self.assertEqual(product.price, 250)
 

@@ -7,18 +7,29 @@ from product import Product
 
 class TestCalculator(unittest.TestCase):
     def test_sums_items_without_discount(self):
+        # Arrange
         cap = Product("cap", price=150)
         order = OrderBuilder().add_item(cap, quantity=1).build()
 
-        self.assertEqual(calculate_total(order), 150)
+        # Act
+        total = calculate_total(order)
+
+        # Assert
+        self.assertEqual(total, 150)
 
     def test_applies_10_percent_if_over_500(self):
+        # Arrange
         t_shirt = Product("t_shirt", price=250)
         order = OrderBuilder().add_item(t_shirt, quantity=3).build()
 
-        self.assertEqual(calculate_total(order), 675)
+        # Act
+        total = calculate_total(order)
+
+        # Assert
+        self.assertEqual(total, 675)
 
     def test_applies_discount10_coupon_then_big_order_rule(self):
+        # Arrange
         t_shirt = Product("t_shirt", price=250)
         cap = Product("cap", price=150)
         order = (
@@ -28,7 +39,11 @@ class TestCalculator(unittest.TestCase):
             .build()
         )
 
-        self.assertEqual(calculate_total(order, coupon="DISCOUNT10"), 526.5)
+        # Act
+        total = calculate_total(order, coupon="DISCOUNT10")
+
+        # Assert
+        self.assertEqual(total, 526.5)
 
 
 if __name__ == "__main__":

@@ -6,9 +6,11 @@ from product import Product
 
 class TestOrderBuilder(unittest.TestCase):
     def test_build_returns_order_with_added_items(self):
+        # Arrange
         t_shirt = Product("t_shirt", price=250)
         cap = Product("cap", price=150)
 
+        # Act
         order = (
             OrderBuilder()
             .add_item(t_shirt, quantity=2)
@@ -16,6 +18,7 @@ class TestOrderBuilder(unittest.TestCase):
             .build()
         )
 
+        # Assert
         self.assertEqual(order.items, [(t_shirt, 2), (cap, 1)])
 
 
