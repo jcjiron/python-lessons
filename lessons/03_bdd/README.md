@@ -67,6 +67,51 @@ You should see both scenarios pass:
 6 steps passed, 0 failed, 0 skipped
 ```
 
+## Real-world use cases
+
+BDD earns its place once the behavior matters to someone who doesn't read
+code:
+
+- **Business rules that change often, dictated by non-engineers.**
+  Pricing, tax calculation, discount eligibility, credit approval policy.
+  When finance/legal/product ask for a rule change, the `.feature` file is
+  the document they can read (and even edit) without touching Python — and
+  it's still a real, running test.
+- **Checkout / e-commerce flows.** Free-shipping rules, coupons, return
+  policies — the classic `behave`/Cucumber use case, since QA (who may not
+  code) can write or read the acceptance scenarios directly.
+- **Regulatory compliance / audits.** Banking, insurance, healthcare. When
+  an auditor asks "how do you know the system does X when Y happens," a
+  running Gherkin scenario is living evidence — not a PDF that went stale
+  a year ago.
+- **Public libraries / SDKs.** The value isn't for you — it's for whoever
+  *consumes* your library. Scenarios document the public contract ("this
+  is how my calculator behaves from the outside") without exposing the
+  implementation. If a change breaks the contract, the scenario fails
+  before you publish it. Concrete examples:
+  - An internal "business rules" package (e.g. pricing/commission
+    calculation) shared across multiple services — web checkout, mobile
+    backend, in-store POS — published to a private registry so every
+    consumer gets the exact same behavior instead of reimplementing it.
+  - A payments SDK (Stripe/PayPal-style): declined cards, retries, 3D
+    Secure — the exact behavior promised to whoever integrates it.
+  - An authorization/policy engine: "Given a user with role Supervisor,
+    when they try to approve an order over $10,000, then access is
+    denied" — security behavior that can't be ambiguous.
+  - Multi-language SDKs sharing the **same** `.feature` file across
+    implementations (Python via `behave`, JS via Cucumber.js, Java via
+    Cucumber-JVM) to guarantee identical behavior across every language a
+    product ships in.
+  - A validation library with legal/fiscal impact (tax ID formats, VAT
+    calculation by region) consumed by multiple systems, where behavior
+    must be auditable.
+- **Bridging manual QA into automation.** When QA already tests by hand
+  using "given I do this, then that happens" cases, BDD turns those into
+  automated regression almost verbatim — same language, now executable.
+- **Rescuing legacy systems with no specs.** Before refactoring undocumented
+  code, writing scenarios that capture *current* behavior (however odd)
+  means any refactor that breaks it gets caught.
+
 ## What to notice
 
 - `behave` matches each `Given/When/Then` line to a decorated function in
