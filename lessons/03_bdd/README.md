@@ -25,25 +25,6 @@ business rules where "what should happen" is easy to get wrong.
 **Risk:** verbose specs, or "TDD in disguise" — writing Gherkin just to
 check a box, without it actually changing how you think about the problem.
 
-## Two levels of BDD (important distinction)
-
-- **Service-level BDD (what this lesson does):** the steps call the
-  domain code directly (`calculate_total(...)`) — same level as TDD, just
-  described differently. No `main.py`, no running app — it's still an
-  automated test, just written in business language.
-- **End-to-end BDD:** the steps drive a real running application (a CLI
-  command, an API call, a browser). That needs an actual entry point.
-  That's closer to Outside-In Development (lesson 5) and ATDD (lesson 4).
-
-## The example
-
-Reuses `Product`, `OrderBuilder`, and `calculate_total` from lesson 2 —
-same domain, no logic duplicated.
-
-- `features/orders.feature` — the behavior, in Given/When/Then
-- `features/steps/order_steps.py` — connects that text to the real domain
-  code
-
 ## Setup
 
 This lesson needs the `behave` package (not in the standard library):
@@ -66,6 +47,25 @@ You should see both scenarios pass:
 2 scenarios passed, 0 failed, 0 skipped
 6 steps passed, 0 failed, 0 skipped
 ```
+
+## Two levels of BDD (important distinction)
+
+- **Service-level BDD (what this lesson does):** the steps call the
+  domain code directly (`calculate_total(...)`) — same level as TDD, just
+  described differently. No `main.py`, no running app — it's still an
+  automated test, just written in business language.
+- **End-to-end BDD:** the steps drive a real running application (a CLI
+  command, an API call, a browser). That needs an actual entry point.
+  That's closer to Outside-In Development (lesson 5) and ATDD (lesson 4).
+
+## The example
+
+Reuses `Product`, `OrderBuilder`, and `calculate_total` from lesson 2 —
+same domain, no logic duplicated.
+
+- `features/orders.feature` — the behavior, in Given/When/Then
+- `features/steps/order_steps.py` — connects that text to the real domain
+  code
 
 ## Real-world use cases
 
