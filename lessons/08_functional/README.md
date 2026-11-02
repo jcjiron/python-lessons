@@ -19,6 +19,13 @@ lesson 7's `OrderBuilder`, which accumulates `self._lines` with
 `.append`. Instead, every "add an item" operation returns a **different**
 order, leaving the original untouched.
 
+**Good for:** concurrency (nothing shared gets mutated, so nothing can
+get corrupted between threads), complex logic made of many chainable
+rules.
+**Risk:** mental overhead if you're coming from OOP, and friction if the
+rest of the system (a UI, a database layer) genuinely expects
+stateful objects.
+
 ## Running it
 
 No extra install — standard library `unittest`:
